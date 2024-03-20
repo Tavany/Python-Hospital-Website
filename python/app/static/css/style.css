@@ -1,0 +1,194 @@
+:root {
+  --primary: rgba(67, 155, 104, 1);
+  --secondary: rgba(79, 79, 79, 1);
+  --grey: rgba(0, 0, 0, 0.4);
+  --grey2: rgba(0, 0, 0, 0.6);
+  --bg: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg);
+  color: #fff;
+  min-height: 2000px;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem 7%;
+  background-color: rgba(255, 255, 255, 1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+.navbar .navbar-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  font-style: italic;
+  /* pointer-events: none; */
+}
+
+.navbar .navbar-nav a {
+  color: var(--secondary);
+  display: inline-block;
+  font-size: 1.3rem;
+  margin: 0 1rem;
+}
+
+body.route-home .navbar .navbar-nav a.home {
+  color: var(--primary);
+}
+body.route-daftar .navbar .navbar-nav a.schedule {
+  color: var(--primary);
+}
+body.route-hasil .navbar .navbar-nav a.profile {
+  color: var(--primary);
+}
+
+.navbar .navbar-nav a:hover {
+  color: var(--primary);
+}
+
+.navbar .navbar-nav a::after {
+  content: "";
+  display: block;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.1rem solid var(--primary);
+  transform: scaleX(0);
+  transition: 0.2s linear;
+}
+
+.navbar .navbar-nav a:hover::after {
+  transform: scaleX(0.5);
+}
+
+.navbar .navbar-extra a {
+  color: var(--primary);
+  margin: 0 0.5rem;
+}
+
+.navbar .navbar-extra a:hover {
+  color: var(--primary);
+}
+
+.navbar .navbar-extra #register {
+  color: var(--primary);
+  border: 1px solid var(--primary); /* Atur warna sesuai kebutuhan */
+  padding: 5px 10px; /* Atur padding sesuai kebutuhan */
+  border-radius: 3px; /* Atur border-radius untuk sudut yang lebih lembut */
+}
+
+#hamburger-menu {
+  display: none;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 120vh;
+  display: flex;
+  align-items: center;
+  background-image: url("../img/hero-bg.png");
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+  background-position: right top;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  bottom: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(1, 1, 3, 1) 8%,
+    rgba(255, 255, 255, 0) 50%
+  );
+}
+
+.hero .content {
+  padding: 1.4rem 5%;
+  /* max-width: 100rem; */
+  min-width: 80rem;
+  margin: 0 auto; /* Mengatur margin otomatis secara horizontal */
+  text-align: center; /* Mengatur teks ke tengah */
+}
+
+.hero .content h1 {
+  font-size: 3rem;
+  color: var(--secondary);
+  text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+  line-height: 1.2;
+  user-select: none;
+}
+
+.hero .content h1 span {
+  color: var(--primary);
+}
+
+.hero .content .reservation-bar {
+  color: var(--grey2);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  margin-top: 1.4rem;
+  border: 1px solid var(--primary); /* Atur warna sesuai kebutuhan */
+  padding: 15px 20px; /* Atur padding sesuai kebutuhan */
+  border-radius: 3px; /* Atur border-radius untuk sudut yang lebih lembut */
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.hero .content .form-group {
+  flex: 0 1 calc(33% - 30px); /* Set each form group to occupy 25% width with a 30px margin */
+  margin-bottom: 10px;
+  box-sizing: border-box; /* Include padding and border in the total width */
+  border-right: 2px solid #ccc;
+}
+
+.hero .content label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.hero .content button.find-doctor-button {
+  margin-left: auto;
+}
+
+.hero .content p {
+  color: var(--grey2);
+  width: 586px;
+  height: 96px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.hero .content input[type="date"],
+.hero .content select {
+  background-color: #ffffff; /* Sesuaikan warna latar belakang sesuai kebutuhan */
+  border: 1px solid #ccc; /* Sesuaikan warna border sesuai kebutuhan */
+  padding: 8px; /* Sesuaikan padding sesuai kebutuhan */
+  border-radius: 3px; /* Sesuaikan border-radius sesuai kebutuhan */
+}

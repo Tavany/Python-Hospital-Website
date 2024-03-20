@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediCare</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='/css/style.css') }}"
+    />
+  </head>
+  <body class="{{ active_route }}">
+    <!-- Navbar start -->
+    <nav class="navbar">
+      <a class="navbar-logo"><span>MediCare</span></a>
+
+      <div class="navbar-nav">
+        <a href="/home" class="home">Dashboard</a>
+        <a href="/schedule" class="schedule">Schedule</a>
+        <a href="/profile" class="profile">Profile</a>
+      </div>
+
+      <div class="navbar-extra">
+        <a href="/login" id="login">Login</a>
+        <a href="/register" id="register">Register</a>
+        <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+      </div>
+    </nav>
+    <!-- Navbar end -->
+
+    <!-- Hero Section start -->
+    <section class="hero" id="home">
+      <main class="content">
+        <h1>Bringing Care Closer,</h1>
+        <h1>Schedule with <span>MediCare</span>.</h1>
+        <br />
+        <div class="reservation-bar">
+          <div class="form-group">
+            <label for="reservation-time">Reservation time</label>
+            <input
+              type="date"
+              id="reservation-time"
+              name="reservation-time"
+              min="{{ data['today'].strftime('%Y-%m-%d') }}"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="reservation-doctor">Doctor Specialist</label>
+            <select name="reservation-doctor" id="reservation-doctor">
+              {% for specialist in data['specialists'] %}
+              <option value="{{ specialist['specialist'] }}">
+                {{ specialist['specialist'] }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="reservation-price">Price</label>
+            <select name="reservation-price" id="reservation-price">
+              {% for price_data in data['price'] %}
+              <option value="{{ price_data['price'] }}">
+                {{ price_data['price'] }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <button class="find-doctor-button" onclick="submitForm()">
+            Find my Doctor
+          </button>
+        </div>
+
+        <p>
+          At RS. Medika Nusantara, we understand that your well-being is a
+          priority. That's why this platform is designed to simplify the process
+          of scheduling appointments with our esteemed medical professionals.
+        </p>
+      </main>
+    </section>
+
+    <!-- Hero Section end -->
+
+    <script>
+      document
+        .getElementById("reservation-doctor")
+        .addEventListener("change", function () {
+          // Panggil fungsi untuk memperbarui harga
+          updatePriceOptions();
+        });
+    </script>
+    <script>
+      function updatePriceOptions() {
+          // Dapatkan elemen dokter yang dipilih
+          var selectedDoctor = document.getElementById('reservation-doctor').value;
+
+          // Dapatkan elemen select harga
+          var priceSelect = document.getElementById('reservation-price');
+
+          // Hapus opsi harga yang ada
+          priceSelect.innerHTML = "";
+
+          // Loop melalui data harga dan tambahkan opsi yang sesuai dengan dokter yang dipilih
+          {% for price_data in data['price'] %}
+              if ("{{ price_data['specialist'] }}" === selectedDoctor) {
+                  var option = document.createElement("option");
+                  option.value = "{{ price_data['price'] }}";
+                  option.text = "{{ price_data['price'] }}";
+                  priceSelect.add(option);
+              }
+          {% endfor %}
+      }
+    </script>
+  </body>
+</html>
